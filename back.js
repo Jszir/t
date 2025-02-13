@@ -5,15 +5,15 @@ let y_bt = document.getElementById("yes")
 let n_bt = document.getElementById("no")
 let img_1 = document.getElementById("img1")
 let img_2 = document.getElementById("img2")
-y_bt.style.width = 200 + 'px'
-y_bt.style.height = 200 + 'px'
-n_bt.style.width = 200 + 'px'
-n_bt.style.height = 200 + 'px'
-let width = 200; // setting the width to 200px
- let height = 200 ; // setting the width to 200px
+y_bt.style.width = 100 + 'px'
+y_bt.style.height = 100 + 'px'
+n_bt.style.width = 100 + 'px'
+n_bt.style.height = 100 + 'px'
+let width = 100; // setting the width to 200px
+ let height = 100 ; // setting the width to 200px
 
- let width_n = 200
- let height_n = 200
+ let width_n = 100
+ let height_n = 100
 
  const images = [
     'images/pv.jpg',
@@ -55,7 +55,11 @@ n_bt.addEventListener("click", function() {
 
 
     img_1.style.opacity = 0;
- 
+
+     y_bt.style.backgroundColor =  '#f0045e'
+    y_bt.style.color = 'white'
+    y_bt.textContent = 'Sí' 
+ y_bt.style.animation = ''
     change_array(images2)
     
 })
@@ -63,14 +67,29 @@ n_bt.addEventListener("click", function() {
 
 y_bt.addEventListener("click", function(){
     y_bt.style.backgroundColor =  'white'
-    y_bt.style.color = 'pink'
-
+    y_bt.style.color = '#ad0043'
+    y_bt.textContent = 'Sí (dale de nuevo)' 
     currentIndex = 0
     img_1.style.opacity = 0;
 
+    y_bt.style.animation = 'bounce 1s infinite'
         change_array(images)
     
 })
+
+    const question = document.getElementById("question");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                question.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    observer.observe(question);
+
 
 
 

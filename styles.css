@@ -32,7 +32,7 @@ h2 { text-align: center;}
     
  }
  #img1, #img2{ 
-    width: 400px;
+    width: 340px;
     height: 400px;
     transition: opacity 0.5s ease;
     margin: 10px;
@@ -42,9 +42,9 @@ h2 { text-align: center;}
 #img2 { opacity: 0; ; z-index: 1; position: relative;
 }
 
-.question { 
+#question { 
     font-family: 'Yesteryear', serif;
-    font-size: 100px;
+    font-size: 62px;
     box-shadow: #8a0136;
     text-align: center;
     padding:  5px;
@@ -52,11 +52,15 @@ h2 { text-align: center;}
     animation: typing 2s steps(40) forwards ;
     overflow: hidden;
     white-space: nowrap;
+    width: 0;
+    opacity: 0;
+    transition: width 3s steps(40), opacity 0.5s ease;
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+#question.visible {
+    animation: typing 3s steps(40) forwards;
+    opacity: 1;
+    width: 100%;
 }
 
 
@@ -69,7 +73,10 @@ h2 { text-align: center;}
 }
 
 #buttons { 
-    flex-direction: row;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    gap: 20px;
 }
 
 #yes, #no { 
@@ -77,12 +84,24 @@ h2 { text-align: center;}
     border: none;
     font-family: 'Montserrat', serif;
     font-weight: 800;
-    font-size: 40px;
+   text-align: center;
+    font-size: 15px;
     color: white;
     border-radius: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
     margin: 8px;
     padding: 20px 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(+15px); }
+    100% { transform: translateY(0); }
 }
