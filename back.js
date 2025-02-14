@@ -1,84 +1,86 @@
 document.addEventListener("DOMContentLoaded", function () { 
 
-    
-let y_bt = document.getElementById("yes")
-let n_bt = document.getElementById("no")
-let img_1 = document.getElementById("img1")
-let img_2 = document.getElementById("img2")
-y_bt.style.width = 100 + 'px'
-y_bt.style.height = 100 + 'px'
-n_bt.style.width = 100 + 'px'
-n_bt.style.height = 100 + 'px'
-let width = 100; // setting the width to 200px
- let height = 100 ; // setting the width to 200px
+    let y_bt = document.getElementById("yes");
+    let n_bt = document.getElementById("no");
+    let img_1 = document.getElementById("img1");
 
- let width_n = 100
- let height_n = 100
+    y_bt.style.width = '100px';
+    y_bt.style.height = '100px';
+    n_bt.style.width = '100px';
+    n_bt.style.height = '100px';
 
- const images = [
-    'images/pv.jpg',
-    'images/tr.jpg',
-    'images/vt.jpg',
-    'images/otra.jpg'
-];
+    let width = 100;
+    let height = 100;
+    let width_n = 100;
+    let height_n = 100;
 
-const images2 = [
-    'images/tr.jpg',
-    'images/tr.jpg',
-    'images/vt.jpg',
-    'images/otra.jpg'
-];
-let currentIndex = 0;
-img_1.src = images[currentIndex]
- 
+    const images = ['images/pv.jpg', 'images/tr.jpg', 'images/tr.jpg'];
+    const images2 = ['images/tr.jpg', 'images/tr.jpg', 'images/vt.jpg', 'images/otra.jpg'];
+    let currentIndex = 0;
+    img_1.src = images[currentIndex];
 
-function change_array (group_images) { 
-    
-    setTimeout(() => {
-        currentIndex = (currentIndex + 1) % group_images.length;
-        img_1.src = group_images[currentIndex]
-        img_1.style.opacity = 1;
-    }, 200);
-}
-n_bt.addEventListener("click", function() { 
-    
-  
-    width += 50
-    height += 50
-    y_bt.style.width = width  + 'px'; // setting the width to 200px
-    y_bt.style.height = height + 'px'; // setting the width to 200px
+    let previousButton = 3;
 
-    width_n -= 20
-    height_n -= 20
-    n_bt.style.width =  width_n + 'px'
-    n_bt.style.height =  height_n + 'px'
+    function change_array(group_images) { 
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % group_images.length;
+            img_1.src = group_images[currentIndex];
+            img_1.style.opacity = 1;
+            console.log(`currentIndex: ${currentIndex}`);
+        }, 200);
+    }
 
+    n_bt.addEventListener("click", function() { 
+        // Reiniciar el índice si el botón anterior era diferente
+        if (previousButton !== 1) currentIndex = 0;
+        previousButton = 1;
 
-    img_1.style.opacity = 0;
+        width += 50;
+        height += 50;
+        y_bt.style.width = width  + 'px';
+        y_bt.style.height = height + 'px';
 
-     y_bt.style.backgroundColor =  '#f0045e'
-    y_bt.style.color = 'white'
-    y_bt.textContent = 'Sí' 
- y_bt.style.animation = ''
-    change_array(images2)
-    
-})
+        width_n -= 20;
+        height_n -= 20;
+        n_bt.style.width = width_n + 'px';
+        n_bt.style.height = height_n + 'px';
 
+        img_1.style.opacity = 0;
 
-y_bt.addEventListener("click", function(){
-    y_bt.style.backgroundColor =  'white'
-    y_bt.style.color = '#ad0043'
-    y_bt.textContent = 'Sí (dale de nuevo)' 
-    currentIndex = 0
-    img_1.style.opacity = 0;
+        y_bt.style.backgroundColor = '#f0045e';
+        y_bt.style.color = 'white';
+        y_bt.textContent = 'Sí';
+        y_bt.style.animation = '';
 
-    y_bt.style.animation = 'bounce 1s infinite'
-        change_array(images)
-    
-})
+        change_array(images2);
+    });
+
+    y_bt.addEventListener("click", function() {
+        // Reiniciar el índice si el botón anterior era diferente
+        if (previousButton !== 2) currentIndex = 0;
+        previousButton = 2;
+
+        y_bt.style.backgroundColor = 'white';
+        y_bt.style.color = '#ad0043';
+        y_bt.textContent = 'Sí (dale de nuevo)';
+        img_1.style.opacity = 0;
+        y_bt.style.animation = 'bounce 1s infinite';
+
+        if (y_bt.textContent === 'Sí (dale de nuevo)' && currentIndex === 2) { 
+            y_bt.style.position = 'fixed'; // Sigue al usuario
+            y_bt.style.zIndex = '9999';    // Se asegura de estar sobre todo
+            y_bt.style.top = '0'; 
+            y_bt.style.margin = '0';
+            y_bt.style.animation = 'bounce2 1s infinite'
+            y_bt.style.left = '-9';         // Pegado a la izquierda
+            y_bt.style.width = '400px';
+            y_bt.style.height = '820px';
+
+        }
+        change_array(images);
+    });
 
     const question = document.getElementById("question");
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -90,8 +92,4 @@ y_bt.addEventListener("click", function(){
 
     observer.observe(question);
 
-
-
-
-})
-
+});
