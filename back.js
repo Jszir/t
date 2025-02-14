@@ -14,6 +14,32 @@ document.addEventListener("DOMContentLoaded", function () {
     let width_n = 100;
     let height_n = 100;
 
+    let heartClicks = 0
+    function createHeart() { 
+
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '❤️';
+    
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+    
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+    
+        document.body.appendChild(heart);  heart.addEventListener('click', () => {
+            heartClicks++;
+            console.log(`Corazones clickeados: ${heartClicks}`);
+            heart.remove();
+        });
+    
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    
+    }
+    
+        
     const images = ['images/pv.jpg', 'images/tr.jpg', 'images/tr.jpg'];
     const images2 = ['images/tr.jpg', 'images/tr.jpg', 'images/vt.jpg', 'images/otra.jpg'];
     let currentIndex = 0;
@@ -73,11 +99,35 @@ document.addEventListener("DOMContentLoaded", function () {
             y_bt.style.margin = '0';
             y_bt.style.animation = 'bounce2 1s infinite'
             y_bt.style.left = '-9';         // Pegado a la izquierda
-            y_bt.style.width = '400px';
-            y_bt.style.height = '820px';
+            y_bt.style.borderRadius = '0'; 
+            y_bt.style.width = '420px';
+            y_bt.style.height = '950px';
 
         }
         change_array(images);
+
+        if( parseInt(y_bt.style.width) > 400 ) { 
+            setInterval(createHeart, 500);
+            y_bt.textContent= 'Revienta los que puedass'
+            document.querySelectorAll('img').forEach(img => img.style.display = 'none');
+
+            // Ocultar todos los encabezados h1
+            document.querySelectorAll('h1').forEach(h1 => h1.style.display = 'none');
+            
+            // Ocultar todos los párrafos
+            document.querySelectorAll('p').forEach(p => p.style.display = 'none');
+            document.body.style.backgroundColor = 'white'
+        }
+
+        if(heartClicks > 20
+        ) {  y_bt.textContent = 'Clickea el fondo y obten la sorpresa!';
+            y_bt.style.fontSize = '60px'
+            y_bt.addEventListener('click', () => {
+                window.location.href = 'second.html';
+            });
+        
+        }
+
     });
 
     const question = document.getElementById("question");
@@ -91,5 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { threshold: 0.5 });
 
     observer.observe(question);
+
+
+
 
 });
