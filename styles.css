@@ -24,7 +24,7 @@ h1 {
     animation-delay: 0.3s;
 }
 h2 { text-align: center;    animation: fadeInDown 1s ease forwards;
-    animation-delay: 0.3s;}
+    animation-delay: 0.3s; margin-top: 50px;}
 
     @keyframes fadeInDown {
         from {
@@ -85,6 +85,7 @@ h2 { text-align: center;    animation: fadeInDown 1s ease forwards;
     width: 0;
     opacity: 0;
     transition: width 3s steps(40), opacity 0.5s ease;
+    text-shadow: 1px 3px 0px #8a0136;
 }
 
 #question.visible {

@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
         
-    const images = ['images/trr.png', 'images/te.png', 'images/tr.jpg'];
+    const images = ['images/trr.png', 'images/te.png', 'images/te.png'];
     const images2 = ['images/pv.png', 'images/vm.png', 'images/lg.png', 'images/tr.png', 'images/td.png'];
     let currentIndex = 0;
     img_1.src = images[currentIndex];
@@ -108,10 +108,11 @@ let clicknt_count = 0
             });
         }
     });
-
+    let clickbt_count = 0
     y_bt.addEventListener("click", function() {
         // Reiniciar el índice si el botón anterior era diferente
-        if (previousButton !== 2) currentIndex = 0;
+        clickbt_count++
+        if (previousButton !== 2) currentIndex = 0, clickbt_count= 0;
         previousButton = 2;
 
         y_bt.style.backgroundColor = 'white';
@@ -119,6 +120,7 @@ let clicknt_count = 0
         y_bt.textContent = 'Sí (dale de nuevo)';
         img_1.style.opacity = 0;
         y_bt.style.animation = 'bounce 1s infinite';
+        document.body.style.backgroundColor = ' #fc8cb7'
 
         if (y_bt.textContent === 'Sí (dale de nuevo)' && currentIndex === 1) { 
             y_bt.style.position = 'fixed'; // Sigue al usuario
@@ -134,20 +136,23 @@ let clicknt_count = 0
         }
         change_array(images);
 
-        if( parseInt(y_bt.style.width) > 400 ) { 
+        if( parseInt(y_bt.style.width) > 400 && clickbt_count ===1) { 
             setInterval(createHeart, 500);
             y_bt.textContent= 'Revienta los que puedass'
             document.querySelectorAll('img').forEach(img => img.style.display = 'none');
 
             // Ocultar todos los encabezados h1
             document.querySelectorAll('h1').forEach(h1 => h1.style.display = 'none');
+
+            document.querySelectorAll('h2').forEach(h1 => h1.style.display = 'none');
             
             // Ocultar todos los párrafos
             document.querySelectorAll('p').forEach(p => p.style.display = 'none');
             document.body.style.backgroundColor = 'white'
-        }
+            n_bt.style.display='none'
+        } 
 
-        if(heartClicks > 20
+        if(heartClicks > 100
         ) {  y_bt.textContent = 'Clickea el fondo y obten la sorpresa!';
             y_bt.style.fontSize = '60px'
             y_bt.addEventListener('click', () => {
