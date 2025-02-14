@@ -117,12 +117,14 @@ let clicknt_count = 0
 
         y_bt.style.backgroundColor = 'white';
         y_bt.style.color = '#ad0043';
-        y_bt.textContent = 'Sí (dale de nuevo)';
+        if (y_bt.textContent !== 'Revienta los que puedass') {
+            y_bt.textContent = 'Sí (dale de nuevo)';
+        }
         img_1.style.opacity = 0;
         y_bt.style.animation = 'bounce 1s infinite';
         document.body.style.backgroundColor = ' #fc8cb7'
 
-        if (y_bt.textContent === 'Sí (dale de nuevo)' && currentIndex === 1) { 
+        if (y_bt.textContent === 'Sí (dale de nuevo)' && currentIndex === 1 ) { 
             y_bt.style.position = 'fixed'; // Sigue al usuario
             y_bt.style.zIndex = '9999';    // Se asegura de estar sobre todo
             y_bt.style.top = '0'; 
@@ -137,7 +139,8 @@ let clicknt_count = 0
         change_array(images);
 
         if( parseInt(y_bt.style.width) > 400 && clickbt_count ===1) { 
-            setInterval(createHeart, 500);
+            setInterval(createHeart, 100);
+
             y_bt.textContent= 'Revienta los que puedass'
             document.querySelectorAll('img').forEach(img => img.style.display = 'none');
 
@@ -150,9 +153,9 @@ let clicknt_count = 0
             document.querySelectorAll('p').forEach(p => p.style.display = 'none');
             document.body.style.backgroundColor = 'white'
             n_bt.style.display='none'
+    
         } 
-
-        if(heartClicks > 100
+        if(heartClicks > 20
         ) {  y_bt.textContent = 'Clickea el fondo y obten la sorpresa!';
             y_bt.style.fontSize = '60px'
             y_bt.addEventListener('click', () => {
