@@ -139,7 +139,7 @@ let clicknt_count = 0
         change_array(images);
 
         if( parseInt(y_bt.style.width) > 400 && clickbt_count ===1) { 
-            setInterval(createHeart, 100);
+            setInterval(createHeart, 200);
 
             y_bt.textContent= 'Revienta los que puedass'
             document.querySelectorAll('img').forEach(img => img.style.display = 'none');
@@ -155,7 +155,7 @@ let clicknt_count = 0
             n_bt.style.display='none'
     
         } 
-        if(heartClicks > 20
+        if(heartClicks > 100
         ) {  y_bt.textContent = 'Clickea el fondo y obten la sorpresa!';
             y_bt.style.fontSize = '60px'
             y_bt.addEventListener('click', () => {
